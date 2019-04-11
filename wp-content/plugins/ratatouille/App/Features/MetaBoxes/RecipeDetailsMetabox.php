@@ -6,7 +6,7 @@ use App\Features\PostTypes\RecipePostType;
 class RecipeDetailsMetabox
 {
     public static $slug = 'recipe_details_metabox';
-    
+
     /**
      * Ajout d'une méta box au type de contenu qui sont passer dans le tableau $screens
      * https://developer.wordpress.org/plugins/metadata/custom-meta-boxes/
@@ -31,6 +31,12 @@ class RecipeDetailsMetabox
      */
     public static function render()
     {
-        echo "<h3>Hello</h3>";
+        // Chemin jusqu'au dossier dans le quel on est, cela retourne /home/utilisateur/Bureau/dossier-du-projet, pour ma part j'ai obtenu :
+        // /Users/vadim/codingschool/WordPress/PluginDev/wp_recipe_plugin_nico
+        $path_racine = $_SERVER["DOCUMENT_ROOT"];
+        // Vous pouvez faire un echo si vous le désirez
+        // echo $path_racine;
+        // A ceci je concatène le reste du chemin jusqu'a arrivé dans le fichier recipe-detail-html
+        include($path_racine . '/wp-content/plugins/ratatouille/resources/views/metaboxes/recipe-detail.html.php');
     }
 }
