@@ -45,7 +45,14 @@ class RecipePostType
                     'category',
                     'post_tag'
                 ],
-                'menu_icon' => 'dashicons-book' // https://developer.wordpress.org/resource/dashicons/#admin-tools
+                'menu_icon' => 'dashicons-book', // https://developer.wordpress.org/resource/dashicons/#admin-tools
+                // On choisis dans supports ce qu'on veut rendre accessible dans notre post-type, un titre,un textarea,un extrait et la possibilité de rajouter une image mise en avant.
+                'supports' =>  [
+                    'title',
+                    'editor',
+                    'excerpt',
+                    'thumbnail'
+                ],
             ]
         );
     }
