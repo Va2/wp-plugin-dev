@@ -40,9 +40,9 @@ class RecipePostType
                 'rewrite' => [
                     'slug' => 'recette'
                 ],
-                // Rajout d'une icone à coté de notre lien 'Recette' dans notre menu. Par défaut on à une epingle, je l'ai changée pour un bouquin. La liste des icones peut être retrouvé sur :
-                // https://developer.wordpress.org/resource/dashicons/#admin-tools
-                'menu_icon' => 'dashicons-book'
+                // On active la possibilité d'assigner une catégorie à notre Recette grâce à la taxonomie 'category', rajoutez là puis allez voir,une fois fait essayez de rajouter un second arguement dans le tableau 'post_tag' et voyez ce que cela fait.
+                'taxonomies' => ['category'],
+                'menu_icon' => 'dashicons-book' // https://developer.wordpress.org/resource/dashicons/#admin-tools
             ]
         );
     }
