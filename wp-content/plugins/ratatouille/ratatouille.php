@@ -3,6 +3,7 @@
 // use App\Features\PostTypes\RecipePostType cela reviendrait au même un créer automatiqement un alias du même nom si on ne le précise pas.
 use App\Features\PostTypes\RecipePostType;
 use App\Features\Taxonomies\RecipeTaxonomy;
+use App\Features\MetaBoxes\RecipeDetailsMetabox;
 
 /**
  * Plugin Name:     Ratatouille
@@ -24,3 +25,5 @@ require_once('autoload.php');
 
 add_action('init',[RecipePostType::class, 'register']);
 add_action('init', [RecipeTaxonomy::class, 'register']);
+
+add_action('add_meta_boxes_recipe', [RecipeDetailsMetabox::class, 'add_meta_box']);
