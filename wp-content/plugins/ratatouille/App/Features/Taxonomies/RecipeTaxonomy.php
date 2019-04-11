@@ -19,9 +19,15 @@ use App\Features\PostTypes\RecipePostType;
         ];
         $args = [ // Rajout d'arguments
             'labels' => $labels,
+            // Par défaut hierarchical est a défaut, si c'est défaut l'aspect de votre taxonomy dans votre recette ressemblera a celle des étiquettes, si cest true l'aspect sera semblable a celle des catégories.
+            'hierarchical' => true,
+            // Permet d'activer ou de désactiver la taxonomy par défaut c'est en true, on la met juste pour que vous connaissiez.
+            'show_ui' => true,
+            // Visible dans le menu ou non.
+            'show_in_menu' => true,
+            // Show admin column fait référence la column de prévisualisation là ou il y a 'Toutes les recettes', il y a la column titre, catégorie, etiquette etc... Si c'est true il y aura également Type de recette
+            'show_admin_column' => true,
         ];
-        
-        // J'ai créer un tableau ou j'ai mis deux labels, ensuite dans les $args j'ai utilisé un seul paramètre c'est 'labels' au quel j'ai donné la valeur $labels. J'ai fini par passé $args en troisème paramètre à la fonction register_taxonomy, vous pouvez aller observer les changements...
         register_taxonomy(self::$slug, [RecipePostType::$slug], $args);
     }
 }
