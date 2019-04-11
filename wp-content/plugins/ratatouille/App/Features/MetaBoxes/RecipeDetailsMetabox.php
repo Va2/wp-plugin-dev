@@ -36,10 +36,11 @@ class RecipeDetailsMetabox
         $data = get_post_meta(get_the_ID());
         $time = extract_data_attr('rat_time_preparation', $data);
         
-        // Ancienne façon : view('metaboxes/recipe-detail',['time_choisi' => $time]);
-        // Nouvelle façon de passer les données, avec l'aide de la function compact()
-        // La function compact créer un tableau ou elle met en clef le nom de la variable qu'on lui passe. On lui passe cette variable d'une manière assez particulière car on lui retire le '$' et qu'en plus on la met entre guillemet. En lui passant de cette manière elle créer donc un tableau avec comme clef et valeur le meme nom ce qui donne en soit : ['time' => $time] ca veux dire également qu'on doit aller changer dans recipe-detail.html.php le nom de la clef a la quelle on fait appel.
-        view('metaboxes/recipe-detail', compact('time'));
+        // Création d'une variable contenant la valeur qu'on a été chercher dans la BDD grâce à get_post_meta(get_the_ID()) et qu'on assaini via le helper extract_data_attr()
+        $nbr_persons = extract_data_attr('rat_nbr_personne', $data);
+
+        // On rajoute dans compact() la seconde variable pour l'envoyer dans la view recipe-detail
+        view('metaboxes/recipe-detail', compact('time', 'nbr_persons'));
     }
 
     /**
@@ -51,18 +52,14 @@ class RecipeDetailsMetabox
     // $post_id est rempli par l'id du post contenu dans l'url de la page
     public static function save($post_id)
     {
-        // On verifie que $_POST ne soit pas vide pour effectuer l'action uniquement à la sauvegarde du post type
-        // $_POST est une variable globale php qui contient les données qu'on envoi via un formulaire, notre page recette n'est en soit qu'un formulaire avec des inputs et des textarea qu'on rempli et ce qu'on dit en soit c'est :
-        // Si notre $_POST est différent de vide alors on execute les lignes suivantes
         if (count($_POST) != 0) {
-            // On stock dans une variable la valeur de l'input dont le name est 'rat_time_preparation'.
-            // On ajoute sanitize pour sécuriser les valeurs receuilli par l'utilisateur.
-            // https://developer.wordpress.org/themes/theme-security/data-sanitization-escaping/
             $time_preparation = sanitize_text_field($_POST['rat_time_preparation']);
             
-            // On rajoute la valeur stockée dans '$time_preparation' dans la base de donnée avec comme clef 'rat_time_preparation' ça veux dire que par exemple si la valeur rentrée est '15-30' on retrouvera cette valeur 15-30 avec comme étiquette 'rat_time_preparation'
-            // https://developer.wordpress.org/reference/functions/update_post_meta/
             update_post_meta($post_id, 'rat_time_preparation', $time_preparation);
+
+            // On assaini la valeur récupérée par la requête et on l'envoi dans la base de donnée.
+            $nbr_personne = sanitize_text_field($_POST['rat_nbr_personne']);
+            update_post_meta($post_id, 'rat_nbr_personne', $nbr_personne);
         }
     }
 }
