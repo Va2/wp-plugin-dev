@@ -15,7 +15,7 @@
         <th><?php _e("Nombre de personne"); ?></th>
         <td>
             <!-- Création du visuel en html (un input) dans lequel on met en valeur la variable qui à été envoyée par le compact dans RecipeDetailsMetabox.php ligne 43 -->
-            <input type="number" name="rat_nbr_personne" id="rat_nbr_personne" value="<?= $nbr_personne ?>" >
+            <input type="number" name="rat_nbr_persons" id="rat_nbr_persons" value="<?= $nbr_persons ?>" >
         </td>
     </tr>
 </table>
